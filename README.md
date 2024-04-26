@@ -13,4 +13,11 @@ This script performs fruit counting in an image using object-oriented programmin
 
 ![Fruit_Counter](https://github.com/enescanerkan/Advanced-Image-Processing-Python-2/assets/154825118/c203af51-1216-495c-9bde-217f6eb65a15)
 
+# 3) Grabcut_Flower
+The script utilizes the GrabCut algorithm to separate the flower from the background. First, it reads the image in BGR format and converts it to RGB. Then, it defines a region of interest (ROI) using a rectangle. Next, it initializes the GrabCut algorithm with the rectangle and updates the mask to separate the flower and background. Finally, it visualizes the segmented flower by removing the background and displaying the result.(Betik, çiçeği arka plandan ayırmak için GrabCut algoritmasını kullanır. İlk olarak, görüntüyü BGR formatında okur ve RGB formatına dönüştürür. Ardından, dikdörtgen bir bölgeyi (ROI) kullanarak ilgi alanını tanımlar. Sonra, GrabCut algoritmasını dikdörtgenle başlatır ve maskesini güncelleyerek çiçeği ve arka planı ayırır. Son olarak, arka planı kaldırarak ve sonucu görselleştirerek segmente edilmiş çiçek görüntülenir.)
+
+![grabcut](https://github.com/enescanerkan/Advanced-Image-Processing-Python-2/assets/154825118/7db02cb4-f11b-442d-917d-70ccc365ca6d)
+
+
+
 
