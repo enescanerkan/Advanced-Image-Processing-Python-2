@@ -1,0 +1,43 @@
+import numpy as np
+import cv2
+import matplotlib.pyplot as plt
+
+
+class ImageProcessor:
+    def __init__(self, image_path):
+        self.image = cv2.imread(image_path)
+        self.hsv = cv2.cvtColor(self.image, cv2.COLOR_BGR2HSV)
+
+    def apply_mask(self, lower_bound=np.array([25, 55, 0]), upper_bound=np.array([45, 255, 255])):
+        mask = cv2.inRange(self.hsv, lower_bound, upper_bound)
+        result = cv2.bitwise_and(self.image, self.image, mask=mask)
+        return result
+
+    def get_lab_image(self, result):
+        a_channel = cv2.cvtColor(result, cv2.COLOR_BGR2LAB)[:, :, 1]
+        _, thresholded_image = cv2.threshold(a_channel, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        median_blur = cv2.medianBlur(thresholded_image, 29)
+        eroded_image = cv2.erode(median_blur, np.ones((25, 17), np.uint8), iterations=1)
+        dilated_image = cv2.dilate(eroded_image, np.ones((25, 17), np.uint8), iterations=1)
+        inverted_thresholded_image = cv2.bitwise_not(dilated_image)
+        return inverted_thresholded_image, cv2.cvtColor(result, cv2.COLOR_BGR2LAB)
+
+    def plot_images(self, original, mask, lab):
+        fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+        axes[0].imshow(cv2.cvtColor(original, cv2.COLOR_BGR2RGB))
+        axes[0].set_title('Orijinal Resim')
+        axes[1].imshow(mask, cmap='gray')
+        axes[1].set_title('Maske')
+        axes[2].imshow(lab)
+        axes[2].set_title('LAB')
+        plt.show()
+
+    def process_image(self):
+        result = self.apply_mask()
+        inverted_thresholded_image, lab = self.get_lab_image(result)
+        self.plot_images(self.image, inverted_thresholded_image, lab)
+
+
+if __name__ == "__main__":
+    processor = ImageProcessor('images/kivi.jpg')
+    processor.process_image()
