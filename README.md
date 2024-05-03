@@ -18,6 +18,17 @@ The script utilizes the GrabCut algorithm to separate the flower from the backgr
 
 ![grabcut](https://github.com/enescanerkan/Advanced-Image-Processing-Python-2/assets/154825118/7db02cb4-f11b-442d-917d-70ccc365ca6d)
 
+# 4) Object_Tracking
+This repository contains a Python script that utilizes OpenCV for object detection in a video stream. Object detection is a fundamental task in computer vision, with applications ranging from surveillance to autonomous vehicles.(
+Bu depo, bir video akışında nesne tespiti için OpenCV'yi kullanan bir Python betiği içerir. Nesne tespiti, gözetimden otonom araçlara kadar geniş bir uygulama alanına sahip olan bilgisayar görüşünde temel bir görevdir.)
+
+Object detection is the process of locating and classifying objects within an image or video frame. In this script, we focus on detecting moving objects within a video stream. The algorithm consists of two main steps:
+Background Subtraction: We use OpenCV's BackgroundSubtractorMOG2 algorithm to separate foreground objects (moving objects) from the background. This algorithm models each pixel as a mixture of Gaussian distributions to adapt to changing lighting conditions and scene dynamics.
+Contour Detection: After obtaining the foreground mask, we use contour detection to identify and locate individual objects. Contours are outlines of objects in a binary image and can be used to extract features such as area, perimeter, and bounding boxes.(Nesne tespiti, bir görüntü veya video karesi içindeki nesneleri bulma ve sınıflandırma işlemidir. Bu betikte, bir video akışı içinde hareket eden nesneleri tespit etmeye odaklanıyoruz. Algoritma iki temel adımdan oluşur:
+Arka Plan Çıkartma: Arka plan çıkartma işlemi için OpenCV'nin BackgroundSubtractorMOG2 algoritmasını kullanıyoruz. Bu algoritma, her pikseli değişen ışık koşullarına ve sahne dinamiklerine uyum sağlamak için Gauss karışımı olarak modellemektedir.
+Kenar Tespiti: Ön plan maskesini elde ettikten sonra, kontur tespiti kullanarak bireysel nesneleri tanımlayıp konumlandırıyoruz. Konturlar, ikili bir görüntüdeki nesnelerin dış hatlarıdır ve alan, çevre ve sınırlayıcı kutular gibi özelliklerin çıkarılmasında kullanılabilirler.)
+
+![6](https://github.com/enescanerkan/Advanced-Image-Processing-Python-2/assets/154825118/69e1346f-94cf-472d-af29-17ba300260f1)
 
 
 
