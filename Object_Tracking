@@ -1,0 +1,43 @@
+"""
+Author: Enes Can Erkan
+Date: 25.03.2024
+"""
+import cv2
+
+object_detector = cv2.createBackgroundSubtractorMOG2()
+
+cap = cv2.VideoCapture("images/motor.mp4")
+
+width = 640
+height = 480
+
+while True:
+    ret, frame = cap.read()
+
+    frame = cv2.resize(frame, (width, height))
+
+    mask = object_detector.apply(frame)
+    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    # Her dikdörtgenin numarasını tutacak değişken
+    rectangle_number = 1
+
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        if area > 1000:
+            # Konturun etrafına sınırlayıcı bir dikdörtgen oluştur
+            x, y, w, h = cv2.boundingRect(cnt)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            # Dikdörtgenin üzerine numaralandırma ekle
+            cv2.putText(frame, str(rectangle_number), (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+            rectangle_number += 1
+
+    cv2.imshow("Frame", frame)
+    cv2.imshow("Mask", mask)
+
+    key = cv2.waitKey(25)
+    if key == 27:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
